@@ -7,13 +7,11 @@ const cardSets = [
       { term: "CSS", description: "Cascading Style Sheets " },
       {
         term: "element",
-        description:
-          "HTML Tags that make up the HTML documents. <h1>, <div>, <p>",
+        description: "HTML Tags that make up the HTML documents. <h1>, <div>, <p>",
       },
       {
         term: "Attribute",
-        description:
-          "Properties that are added to an HTML element. src, href, id, class",
+        description: "Properties that are added to an HTML element. src, href, id, class",
       },
       {
         term: "<h1>",
@@ -25,13 +23,11 @@ const cardSets = [
       },
       {
         term: "class",
-        description:
-          "html attribute used on to identify multiple elements. Is used as a selector for styles and JavaScript",
+        description: "html attribute used on to identify multiple elements. Is used as a selector for styles and JavaScript",
       },
       {
         term: "selector",
-        description:
-          "Used to select elements on a page, can be elements using the tag name, id using a # or class using a . ",
+        description: "Used to select elements on a page, can be elements using the tag name, id using a # or class using a . ",
       },
       {
         term: "Box Model",
@@ -60,8 +56,7 @@ const cardSets = [
       },
       {
         term: "Props",
-        description:
-          "Arguments passed to components that can hold data and functions",
+        description: "Arguments passed to components that can hold data and functions",
       },
       {
         term: "useState",
@@ -73,8 +68,7 @@ const cardSets = [
       },
       {
         term: "useEffect",
-        description:
-          "React hook used to perform side effects, such as fetching data",
+        description: "React hook used to perform side effects, such as fetching data",
       },
       {
         term: "dependency array",
@@ -88,18 +82,15 @@ const cardSets = [
     cards: [
       {
         term: "List",
-        description:
-          "Data-structure that stores a collection of values in sequential order, are mutable",
+        description: "Data-structure that stores a collection of values in sequential order, are mutable",
       },
       {
         term: "Tuple",
-        description:
-          "Immutable Data-structure that stores a collection of values in sequential order ",
+        description: "Immutable Data-structure that stores a collection of values in sequential order ",
       },
       {
         term: "Sets",
-        description:
-          "Mutable but only store immutable objects, collection of values non-sequential",
+        description: "Mutable but only store immutable objects, collection of values non-sequential",
       },
       { term: "String", description: "Text data-type" },
       {
@@ -109,4 +100,5 @@ const cardSets = [
     ],
   },
 ];
+
 export { cardSets };

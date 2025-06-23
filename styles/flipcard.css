@@ -14,6 +14,9 @@ body main div .cardSets {
   justify-content: center;
   align-items: center;
 }
+.hidden {
+  display: none !important;
+}
 
 body main div .cardSets:hover {
   border-color: black;

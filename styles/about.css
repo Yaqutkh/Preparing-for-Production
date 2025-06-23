@@ -10,6 +10,9 @@
   height: 300px;
   border-radius: 10%;
 }
+.hidden {
+  display: none !important;
+}
 
 .textContainer {
   width: 550px;

@@ -23,26 +23,44 @@
   </header>
 
   <main>
-    <!-- Section: Create Set Form -->
-    <section id="create-set-section" style="display: none;">
-      <form data-cy="create-set-form">
-        <label for="setName">Set Name:</label>
-        <input type="text" id="setName" name="setName" data-cy="create-set-input" />
-        <button type="submit" data-cy="create-set-submit">Create Set</button>
-      </form>
+    <!-- Section: Home -->
+    <section id="home-section" data-cy="home-section">
+      <h2>Welcome to Study Night!</h2>
+      <p>Start your journey of fun flashcard learning.</p>
     </section>
 
-    <!-- Section: Add Card Form -->
-    <section id="add-card-section" style="display: none;">
-      <form data-cy="add-card-form">
-        <label for="cardFront">Card Front:</label>
-        <input type="text" id="cardFront" name="cardFront" data-cy="add-card-front-input" />
+    <!-- Section: About -->
+    <section id="about-section" class="hidden" data-cy="about-section">
+      <h2>About Us</h2>
+      <p>Study Night is a tool to help students memorize using flashcards.</p>
+    </section>
 
-        <label for="cardBack">Card Back:</label>
-        <input type="text" id="cardBack" name="cardBack" data-cy="add-card-back-input" />
+    <!-- Section: Card Sets -->
+    <section id="cardsets-section" class="hidden" data-cy="cardsets-section">
+      <h2>Study Set Library</h2>
 
-        <button type="submit" data-cy="add-card-submit">Add Card</button>
-      </form>
+      <!-- Create Set Form -->
+      <div id="create-set-section">
+        <form data-cy="create-set-form">
+          <label for="setName">Set Name:</label>
+          <input type="text" id="setName" name="setName" data-cy="create-set-input" />
+          <button type="submit" data-cy="create-set-submit">Create Set</button>
+          <p class="error hidden" data-cy="error-message">Please enter a value</p>
+        </form>
+      </div>
+
+      <!-- Add Card Form -->
+      <div id="add-card-section" class="hidden">
+        <form data-cy="add-card-form">
+          <label for="cardFront">Card Front:</label>
+          <input type="text" id="cardFront" name="cardFront" data-cy="add-card-front-input" />
+
+          <label for="cardBack">Card Back:</label>
+          <input type="text" id="cardBack" name="cardBack" data-cy="add-card-back-input" />
+
+          <button type="submit" data-cy="add-card-submit">Add Card</button>
+        </form>
+      </div>
     </section>
   </main>
 

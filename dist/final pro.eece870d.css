@@ -12,6 +12,10 @@ body main div .cardSets {
   box-shadow: 0 2px 5px #d3d3d3;
 }
 
+.hidden {
+  display: none !important;
+}
+
 body main div .cardSets:hover {
   border-color: #000;
 }

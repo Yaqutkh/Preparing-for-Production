@@ -8,6 +8,7 @@ describe('Form Tests', () => {
   beforeEach(() => {
     cy.visit('http://localhost:1234');
     cy.get('[data-cy=menu-cardset]').click();
+    cy.get('[data-cy=toggle_form]').click();
   });
 
   it('shows error on empty Create Set form submission', () => {

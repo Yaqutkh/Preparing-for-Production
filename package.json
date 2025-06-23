@@ -6,7 +6,7 @@
   "scripts": {
     "gulp": "gulp",
     "test": "mocha --experimental-specifier-resolution=node",
-    "cypress": "npx cypress run",
+    "cypress": "cypress run",
     "lint": "eslint --fix cypress/e2e/**/*.js",
     "format": "prettier --write cypress/e2e/*.js",
     "start": "parcel serve src/index.html",

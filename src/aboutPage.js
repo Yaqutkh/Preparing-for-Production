@@ -1,6 +1,4 @@
-
 import { createImage } from "./components/imageComponent.js";
-
 import aboutPageImage from "url:../images/aboutImage.png";
 
 export const renderAboutPage = () => {
@@ -9,6 +7,7 @@ export const renderAboutPage = () => {
 
   const aboutContainer = document.createElement("div");
   aboutContainer.classList.add("aboutContainer");
+  aboutContainer.setAttribute("data-cy", "about-section");
 
   const aboutTitle = document.createElement("h2");
   aboutTitle.textContent = "About Study Night";

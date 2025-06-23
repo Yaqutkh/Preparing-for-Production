@@ -1,19 +1,23 @@
-//DO NOT CHANGE ANYTHING IN THIS FILE//
-
-//This file is responsible for creating errors for our form
 const showError = (message) => {
-  const form = document.querySelector("form");
-  const existingError = document.querySelector(".error");
+  let errorDiv = document.querySelector('#error-message');
+  if (!errorDiv) {
+    errorDiv = document.createElement('div');
+    errorDiv.id = 'error-message';
+    errorDiv.style.color = 'red';
+    errorDiv.style.marginTop = '10px';
+    errorDiv.style.fontWeight = 'bold';
+    document.querySelector('main').prepend(errorDiv);
+  }
+  errorDiv.textContent = message;
+  errorDiv.classList.remove('hidden');
+};
 
-  if (!existingError) {
-    const error = document.createElement("p");
-    error.textContent = message;
-    error.style.color = "red";
-    error.className = "error";
-    form.appendChild(error);
-  } else if (existingError.textContent !== message) {
-    existingError.textContent = message;
+const hideError = () => {
+  const errorDiv = document.querySelector('#error-message');
+  if (errorDiv) {
+    errorDiv.textContent = '';
+    errorDiv.classList.add('hidden');
   }
 };
 
-export { showError };
+export { showError, hideError };

@@ -15,6 +15,9 @@
   margin-top: 20px;
   filter: brightness(70%);
 }
+.hidden {
+  display: none !important;
+}
 
 .homeContainer h1 {
   font-size: 3rem;

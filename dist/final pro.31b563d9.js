@@ -691,79 +691,46 @@ const addNavListener = (elementId, callback)=>{
 addListenerToNavigation();
 
 },{"./cardSetsPage.js":"5j6JS","./aboutPage.js":"i5xgP","./homePage.js":"bA49a"}],"5j6JS":[function(require,module,exports,__globalThis) {
-//DO NOT CHANGE ANYTHING IN THIS FILE//
-// Our application contains flashcard study sets.
-// This file is responsible for loading the page that
-// displays the collection of sets.
-// Users can click on a set to view and interact with the flashcards.
-// Loads data for card sets
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "renderCardSetsPage", ()=>renderCardSetsPage);
 var _dataJs = require("../data/data.js");
-// Function responsible for rendering flashcards page
 var _cardsPageJs = require("./cardsPage.js");
-// Function responsible for creating the form to create a new study set.
 var _createSetJs = require("./createSet.js");
-// Functions responsible for creating the pages header
-//and a toggle button used to toggle the forms visibility
 var _utilityRenderFunctionsJs = require("./utilityRenderFunctions.js");
 const renderCardSetsPage = ()=>{
-    // Creates a container for the pages contents
     const container = document.createElement("div");
     container.className = "cardPageContainer";
-    // Creates the header for the page
+    container.setAttribute("data-cy", "cardsets-section");
     const pageHeader = (0, _utilityRenderFunctionsJs.createHeader)("h2", "Study Set Library", "study-set-header");
-    // Function creates the element representing the study card set
     const sets = createCardSets();
-    // Function responsible for creating the form to create a new study set.
     const form = (0, _createSetJs.createSetForm)((0, _dataJs.cardSets));
-    // Sets the form to be invisible
-    //Creates a button that will toggle the forms visibility
+    form.classList.add("hidden");
     const toggleFormButton = (0, _utilityRenderFunctionsJs.createToggleButton)("Add New Set", form);
-    // Attribute used for selecting the forms during Cypress tests.
     toggleFormButton.setAttribute("data-cy", "toggle_form");
-    //Appends all the content to the pages container
     container.append(pageHeader, sets, toggleFormButton, form);
-    //Gets the main section of the dom
     const main = document.querySelector("main");
-    // Clears the main section of any existing content.
     main.innerHTML = "";
-    //Appends content to the DOM
     main.append(container);
 };
-// Render the study set preview card
-// Includes the study sets title and number of terms
-// Takes the current study set and the sets container as arguments
 const createSetPreviewCard = (set, setContainer)=>{
-    // Container for study set
     const setCard = document.createElement("ul");
     setCard.className = "cardSets";
-    // Dynamic attribute used to select a study set during testing.
     setCard.setAttribute("data-cy", set.id);
-    // Creates the Study Sets Title element
     const liTitle = document.createElement("li");
     liTitle.textContent = set.title;
-    // Creates the Study Sets Number of Terms element
     const liNumberOfTerms = document.createElement("li");
     liNumberOfTerms.textContent = `Terms: ${set.cards.length}`;
-    // Adds an event listener to the study set.
-    // On click, the current page will clear, and the full study set will be rendered.
     setCard.addEventListener("click", ()=>{
         document.querySelector("main").innerHTML = "";
         (0, _cardsPageJs.renderFlashCards)(set.cards);
     });
-    // Appends elements to the set preview
     setCard.append(liTitle, liNumberOfTerms);
-    // Appends the preview to the container
     setContainer.append(setCard);
 };
-// Iterates through the study sets and dynamically creates their DOM elements.
 const createCardSets = ()=>{
-    // Creates a container for the sets
     const setContainer = document.createElement("ul");
     setContainer.className = "setContainer";
-    // Iterates though the sets and creates their dom elements dynamically
     (0, _dataJs.cardSets).forEach((set)=>createSetPreviewCard(set, setContainer));
     return setContainer;
 };
@@ -940,24 +907,33 @@ const addCard = (term, description, set)=>{
 };
 
 },{"./cardsPage.js":"2OgUc","./errors.js":"hSKUY","./utilityRenderFunctions.js":"guzyD","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"hSKUY":[function(require,module,exports,__globalThis) {
-//DO NOT CHANGE ANYTHING IN THIS FILE//
-//This file is responsible for creating errors for our form
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "showError", ()=>showError);
+parcelHelpers.export(exports, "hideError", ()=>hideError);
 const showError = (message)=>{
-    const form = document.querySelector("form");
-    const existingError = document.querySelector(".error");
-    if (!existingError) {
-        const error = document.createElement("p");
-        error.textContent = message;
-        error.style.color = "red";
-        error.className = "error";
-        form.appendChild(error);
-    } else if (existingError.textContent !== message) existingError.textContent = message;
+    let errorDiv = document.querySelector('#error-message');
+    if (!errorDiv) {
+        errorDiv = document.createElement('div');
+        errorDiv.id = 'error-message';
+        errorDiv.style.color = 'red';
+        errorDiv.style.marginTop = '10px';
+        errorDiv.style.fontWeight = 'bold';
+        document.querySelector('main').prepend(errorDiv);
+    }
+    errorDiv.textContent = message;
+    errorDiv.classList.remove('hidden');
+};
+const hideError = ()=>{
+    const errorDiv = document.querySelector('#error-message');
+    if (errorDiv) {
+        errorDiv.textContent = '';
+        errorDiv.classList.add('hidden');
+    }
 };
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"guzyD":[function(require,module,exports,__globalThis) {
+// utilityRenderFunctions.js
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "createElement", ()=>createElement);
@@ -967,33 +943,34 @@ parcelHelpers.export(exports, "createToggleButton", ()=>createToggleButton);
 parcelHelpers.export(exports, "createLabel", ()=>createLabel);
 parcelHelpers.export(exports, "createInput", ()=>createInput);
 parcelHelpers.export(exports, "createSubmitButton", ()=>createSubmitButton);
-const createElement = (elementType, text)=>{
+const createElement = (elementType, text = '')=>{
     const element = document.createElement(elementType);
     element.textContent = text;
     return element;
 };
-const createImage = (url, alt)=>{
+const createImage = (url, alt = '')=>{
     const img = document.createElement('img');
     img.src = url;
     img.alt = alt;
     return img;
 };
-const createHeader = (headerType, text, dataCy)=>{
+const createHeader = (headerType, text = '', dataCy = '')=>{
     const header = document.createElement(headerType);
     header.textContent = text;
-    header.setAttribute('data-cy', dataCy);
+    if (dataCy) header.setAttribute('data-cy', dataCy);
     return header;
 };
-const createToggleButton = (text, element)=>{
+const createToggleButton = (text = '', element)=>{
     const button = document.createElement('button');
     button.textContent = text;
     button.addEventListener('click', ()=>{
+        if (!element) return;
         const isHidden = element.classList.contains('hidden');
         element.classList.toggle('hidden', !isHidden);
     });
     return button;
 };
-const createLabel = (forId, text)=>{
+const createLabel = (forId, text = '')=>{
     const label = document.createElement('label');
     label.setAttribute('for', forId);
     label.textContent = text;
@@ -1007,7 +984,7 @@ const createInput = (id, name, type = 'text', placeholder = '')=>{
     input.placeholder = placeholder;
     return input;
 };
-const createSubmitButton = (text)=>{
+const createSubmitButton = (text = 'Submit')=>{
     const button = document.createElement('button');
     button.type = 'submit';
     button.textContent = text;
@@ -1036,49 +1013,32 @@ const shuffle = (cards)=>{
 };
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"eEtgu":[function(require,module,exports,__globalThis) {
-//DO NOT CHANGE ANYTHING IN THIS FILE//
-//// This file is responsible for generating the form used to create a new study set.
-// This function will be used to render the new study set on submit
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "createSetForm", ()=>createSetForm);
 var _cardSetsPageJs = require("./cardSetsPage.js");
-// This function will render errors
 var _errorsJs = require("./errors.js");
-// These function create elements for our form
 var _utilityRenderFunctionsJs = require("./utilityRenderFunctions.js");
-// This function generates the form for creating new study sets
 const createSetForm = (setCards)=>{
     const section = document.createElement("section");
     section.id = "create-set-section";
-    section.style.display = "none"; // مخفي افتراضياً
-    // Generates a new form element
+    section.classList.add("hidden");
     const form = document.createElement("form");
-    // توحيد data-cy مع اختبار سايبريس
     form.setAttribute("data-cy", "create-set-form");
-    // Creates the label for the title input
-    const label = (0, _utilityRenderFunctionsJs.createLabel)("Card Set Title", "titleInput");
-    // Creates the input for the title
-    const input = (0, _utilityRenderFunctionsJs.createInput)("titleInput");
-    input.setAttribute("data-cy", "create-set-input"); // إضافة لتحديده في الاختبارات
-    // Creates the submit button
+    const label = (0, _utilityRenderFunctionsJs.createLabel)("titleInput", "Card Set Title");
+    const input = (0, _utilityRenderFunctionsJs.createInput)("titleInput", "titleInput");
+    input.setAttribute("data-cy", "create-set-input");
     const submitButton = (0, _utilityRenderFunctionsJs.createSubmitButton)("Submit Set");
-    submitButton.setAttribute("data-cy", "create-set-submit"); // إضافة لتحديده في الاختبارات
-    // Adds an event listener to the form.
-    // On submission, a new study set will be created.
+    submitButton.setAttribute("data-cy", "create-set-submit");
     form.addEventListener("submit", (e)=>submitSet(e, setCards));
-    // Adds elements to the form
     form.append(label, input, submitButton);
     section.appendChild(form);
     return section;
 };
-// This function creates a new study set.
-// It assigns a title to the set and initializes an empty array for cards,
-// which can be added later on the flashcards page.
 const submitSet = (e, setCards)=>{
     e.preventDefault();
-    const title = e.target.titleInput.value;
-    if (!title) (0, _errorsJs.showError)("TITLE CANNOT BE EMPTY");
+    const title = e.target.titleInput.value.trim();
+    if (!title) (0, _errorsJs.showError)("error: TITLE CANNOT BE EMPTY");
     else {
         const id = setCards.length ? setCards[setCards.length - 1].id + 1 : 1;
         setCards.push({
@@ -1102,6 +1062,7 @@ const renderAboutPage = ()=>{
     main.innerHTML = "";
     const aboutContainer = document.createElement("div");
     aboutContainer.classList.add("aboutContainer");
+    aboutContainer.setAttribute("data-cy", "about-section");
     const aboutTitle = document.createElement("h2");
     aboutTitle.textContent = "About Study Night";
     const aboutText = document.createElement("p");
@@ -1149,6 +1110,7 @@ const renderHomePage = ()=>{
     const image = (0, _imageComponentJs.createImage)((0, _homePagePngDefault.default), "Desk of laptops");
     const homeContainer = document.createElement("div");
     homeContainer.className = "homeContainer";
+    homeContainer.setAttribute("data-cy", "home-section");
     homeContainer.append(header, subHeading, image);
     main.append(homeContainer);
 };

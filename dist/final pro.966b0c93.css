@@ -12,6 +12,10 @@ body header nav li {
   margin: 10% 5%;
 }
 
+.hidden {
+  display: none !important;
+}
+
 body header nav li:hover {
   border-bottom-color: #45e9f5;
 }
