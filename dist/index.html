@@ -13,16 +13,37 @@
     <h1 data-cy="header">Study Night</h1>
     <nav aria-label="Main Navigation Menu" class="primary_nav_bar">
       <ul>
-        <li id="homePage">Home</li>
-        <li id="aboutPage">About</li>
-        <li id="cardSetPage">Card Sets</li>
+        <li id="homePage" data-cy="menu-home">Home</li>
+        <li id="aboutPage" data-cy="menu-about">About</li>
+        <li id="cardSetPage" data-cy="menu-cardset">Card Sets</li>
       </ul>
     </nav>
   </header>
+
   <main>
-    <!-- Content loaded dynamically by JavaScript -->
+    <!-- Section: Create Set Form -->
+    <section id="create-set-section" style="display: none">
+      <form data-cy="create-set-form">
+        <label for="setName">Set Name:</label>
+        <input type="text" id="setName" name="setName" data-cy="create-set-input">
+        <button type="submit" data-cy="create-set-submit">Create Set</button>
+      </form>
+    </section>
+
+    <!-- Section: Add Card Form -->
+    <section id="add-card-section" style="display: none">
+      <form data-cy="add-card-form">
+        <label for="cardFront">Card Front:</label>
+        <input type="text" id="cardFront" name="cardFront" data-cy="add-card-front-input">
+
+        <label for="cardBack">Card Back:</label>
+        <input type="text" id="cardBack" name="cardBack" data-cy="add-card-back-input">
+
+        <button type="submit" data-cy="add-card-submit">Add Card</button>
+      </form>
+    </section>
   </main>
-  
+
   <script type="module" src="/final%20pro.08ccf14b.js"></script>
   <script type="module" src="/final%20pro.31b563d9.js"></script>
 

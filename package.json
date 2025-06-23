@@ -4,22 +4,31 @@
   "description": "Udacity Front-End Project with ESLint, Prettier, Gulp, Parcel, Mocha, Cypress",
   "type": "module",
   "scripts": {
-    "gulp": "gulp"
+    "gulp": "gulp",
+    "test": "mocha --experimental-specifier-resolution=node",
+    "cypress": "npx cypress run",
+    "lint": "eslint --fix cypress/e2e/**/*.js",
+    "format": "prettier --write cypress/e2e/*.js",
+    "start": "parcel serve src/index.html",
+    "build": "parcel build src/index.html"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "@eslint/js": "^9.29.0",
     "chai": "^5.2.0",
-    "cypress": "^14.4.1",
+    "cypress": "^14.5.0",
     "eslint": "^9.29.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-cypress": "^5.1.0",
+    "eslint-plugin-prettier": "^5.5.0",
     "globals": "^16.2.0",
     "gulp": "^5.0.1",
     "gulp-cli": "^3.1.0",
     "gulp-shell": "^0.6.5",
     "mocha": "^11.6.0",
     "parcel": "^2.15.4",
-    "prettier": "^3.5.3",
+    "prettier": "^3.6.0",
     "typescript-eslint": "^8.34.0"
   }
 }
